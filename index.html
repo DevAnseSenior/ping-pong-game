@@ -92,6 +92,15 @@
                         }
                     }
 
+                    if(this.x < this.r + leftPaddle.w + gapX) {
+                        if(this.y + this.r > leftPaddle.y && this.y - this.r < leftPaddle.y + leftPaddle.h) {
+                            this._reverseX();
+                        } else {
+                            score.increaseComputer();
+                            this._pointUp();
+                        }
+                    }
+
                     if((this.y - this.r < 0 && this.directionY < 0) || (this.y > field.h - this.r && this.directionY > 0)) {
                         this._reverseY();
                     }
@@ -122,8 +131,8 @@
             }
 
             const score = {
-                human: 1,
-                computer: 2,
+                human: 0,
+                computer: 0,
                 increaseHuman: function () {
                     this.human++;
                 },
