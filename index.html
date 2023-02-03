@@ -17,7 +17,8 @@
         <canvas></canvas>
         <script>
             const canvasEl = document.querySelector("canvas"),
-            canvasCtx = canvasEl.getContext("2d");
+            canvasCtx = canvasEl.getContext("2d"),
+            gapX = 10;
 
             const field = {
                 w: window.innerWidth,
@@ -41,6 +42,27 @@
                     )
                 },
             }
+            const leftPaddle = {
+                x: gapX,
+                y: 100,
+                w: line.w,
+                h: 200,
+                draw: function() {
+                    canvasCtx.fillStyle = "#FFFFFF";
+                    canvasCtx.fillRect(this.x, this.y, this.w, this.h);
+                }
+            }
+
+            const rightPaddle = { 
+                x: field.w - line.w - gapX,
+                y: 100,
+                w: line.w,
+                h: 200,
+                draw: function() {
+                    canvasCtx.fillStyle = "#FFFFFF";
+                    canvasCtx.fillRect(this.x, this.y, this.w, this.h);
+                }
+            }
 
 
             function setup() {
@@ -51,17 +73,8 @@
             function draw() {
                 field.draw();
                 line.draw();
-
-                // draw left racket
-                canvasCtx.fillRect(10, 100, lineWidth, 200);
-
-                // draw right racket
-                canvasCtx.fillRect(
-                    window.innerWidth - lineWidth -10,
-                    100, 
-                    lineWidth, 
-                    200
-                );
+                leftPaddle.draw();
+                rightPaddle.draw();
 
                 // draw the ball
                 canvasCtx.beginPath();
